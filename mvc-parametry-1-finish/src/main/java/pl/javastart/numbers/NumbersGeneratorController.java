@@ -44,7 +44,7 @@ class NumbersGeneratorController {
                 .map(String::valueOf)
                 .toList()
                 .toString();
-        return String.format("Liczby parzyste z przedziału [%d; %d]: %s", from, to, numbers);
+        return String.format("Liczby parzyste z przedziału [%d; %d]: %s", lowerBound, upperBound, numbers);
     }
 
     @GetMapping("/odd-numbers")
@@ -60,7 +60,7 @@ class NumbersGeneratorController {
                 .map(String::valueOf)
                 .toList()
                 .toString();
-        return String.format("Liczby nieparzyste z przedziału [%d; %d]: %s", from, to, numbers);
+        return String.format("Liczby nieparzyste z przedziału [%d; %d]: %s", lowerBound, upperBound, numbers);
     }
 
     private int getLowerBound(Integer from, Integer to) {

@@ -1,10 +1,10 @@
 package pl.javastart.todo;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pl.javastart.todo.dto.*;
 import pl.javastart.todo.exception.*;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 

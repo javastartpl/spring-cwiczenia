@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import pl.javastart.todo.dto.NewTaskDto;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 //@Service
 //@Profile("dev")

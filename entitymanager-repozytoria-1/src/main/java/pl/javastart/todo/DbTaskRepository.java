@@ -1,9 +1,9 @@
 package pl.javastart.todo;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository

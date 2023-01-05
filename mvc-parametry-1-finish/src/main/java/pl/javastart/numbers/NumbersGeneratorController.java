@@ -40,10 +40,7 @@ class NumbersGeneratorController {
         }
         int lowerBound = getLowerBound(from, to);
         int upperBound = getUpperBound(from, to);
-        String numbers = numberService.getEvenNumbersFromRange(lowerBound, upperBound).stream()
-                .map(String::valueOf)
-                .toList()
-                .toString();
+        String numbers = numberService.getEvenNumbersFromRange(lowerBound, upperBound).toString();
         return String.format("Liczby parzyste z przedziału [%d; %d]: %s", lowerBound, upperBound, numbers);
     }
 
@@ -56,10 +53,7 @@ class NumbersGeneratorController {
         }
         int lowerBound = getLowerBound(from, to);
         int upperBound = getUpperBound(from, to);
-        String numbers = numberService.getOddNumbersFromRange(lowerBound, upperBound).stream()
-                .map(String::valueOf)
-                .toList()
-                .toString();
+        String numbers = numberService.getOddNumbersFromRange(lowerBound, upperBound).toString();
         return String.format("Liczby nieparzyste z przedziału [%d; %d]: %s", lowerBound, upperBound, numbers);
     }
 

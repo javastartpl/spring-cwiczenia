@@ -1,6 +1,6 @@
 package pl.javastart.shortener.link;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 class Link {

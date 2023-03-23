@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api")
 class BodyWeightController {
     private static final String BMI_INVALID_WEIGHT_HEIGHT =
-            "invalid data, weight and height parameteres must be positive numbers";
+            "invalid data, weight and height parameters must be positive numbers";
     private static final String BMR_INVALID_WEIGHT_HEIGHT_AGE =
-            "invalid data, weight, height and age parameteres must be positive numbers";
+            "invalid data, weight, height and age parameters must be positive numbers";
     private static final String BMR_INVALID_GENDER =
             "invalid data, gender parameter must be man or woman";
 
@@ -36,11 +37,11 @@ class BodyWeightController {
         return ResponseEntity.ok(bmiResponse);
     }
 
-    @GetMapping(value = "/bmr", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    @GetMapping(value = "/bmr/{gender}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     ResponseEntity<BMRDto> calculateBMRJson(@RequestParam double weight,
                                             @RequestParam double height,
                                             @RequestParam int age,
-                                            @RequestParam String gender) {
+                                            @PathVariable String gender) {
         if (containsNonPositiveNumber(weight, height, age)) {
             return ResponseEntity.badRequest()
                     .header("reason", BMR_INVALID_WEIGHT_HEIGHT_AGE)
@@ -65,6 +66,6 @@ class BodyWeightController {
     }
 
     private boolean isIncorrectGenderValue(String gender) {
-        return !gender.equals("M") && !gender.equals("W");
+        return !gender.equals("man") && !gender.equals("woman");
     }
 }

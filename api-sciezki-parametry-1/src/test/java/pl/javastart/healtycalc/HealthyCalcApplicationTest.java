@@ -7,9 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -35,7 +35,25 @@ class HealthyCalcApplicationTest {
         mockMvc.perform(get("/api/bmi").param("weight", "-100").param("height", "150"))
                 .andExpectAll(
                         status().isBadRequest(),
-                        header().string("reason", "invalid data, weight and height parameteres must be positive numbers")
+                        header().string("reason", "invalid data, weight and height parameters must be positive numbers")
+                );
+    }
+
+    @Test
+    void shouldRespondWithCorrectBmr() throws Exception {
+        mockMvc.perform(get("/api/bmr/man").param("weight", "80").param("height", "180").param("age", "25"))
+                .andExpectAll(
+                        status().isOk(),
+                        jsonPath("bmr", is(1805))
+                );
+    }
+
+    @Test
+    void shouldRespondWithBadRequestForInvalidGender() throws Exception {
+        mockMvc.perform(get("/api/bmr/asdf").param("weight", "100").param("height", "150").param("age", "25"))
+                .andExpectAll(
+                        status().isBadRequest(),
+                        header().string("reason", "invalid data, gender parameter must be man or woman")
                 );
     }
 }
